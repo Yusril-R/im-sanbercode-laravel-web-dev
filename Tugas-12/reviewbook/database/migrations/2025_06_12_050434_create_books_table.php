@@ -17,9 +17,7 @@ return new class extends Migration
             $table->text('summary');
             $table->string('image');
             $table->integer('price');
-            $table->unsignedBigInteger('genre_id');
-
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('age');
             $table->text('address');
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
