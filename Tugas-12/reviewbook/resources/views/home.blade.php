@@ -3,6 +3,12 @@
     Home
 @endsection
 @section('content')
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <header>
         <h1>SanberBook</h1>
     </header>

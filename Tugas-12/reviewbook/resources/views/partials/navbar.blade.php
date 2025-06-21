@@ -1,38 +1,55 @@
-<header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center">
+<style>
+    .navmenu {
+        padding: 15px;
+        font-size: 18px
+    }
+    .navmenu a.active {
+        color: #00b56a !important;
+        font-weight: bold;
+        text-decoration: underline;
+    }
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+    .navmenu a.inactive {
+        color: #333;
+        font-weight: normal;
+        text-decoration: none;
+    }
+</style>
+<header id="header" class="header d-flex align-items-center sticky-top" <div
+    class="container position-relative d-flex align-items-center">
+
+    <a href="/" class="logo d-flex align-items-center me-auto px-2">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Company</h1><span>.</span>
-      </a>
+        <h1 class="sitename ">RevBooks</h1><span>.</span>
+    </a>
 
-      <nav id="navmenu" class="navmenu">
+    <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li class="dropdown"><a href="about.html"><span>About</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="team.html">Team</a></li>
-              <li><a href="testimonials.html">Testimonials</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+            <li><a href="/" class="{{ Request::is('/') ? 'active' : 'inactive' }}">Home</a></li>
+            <li><a href="/book" class="{{ Request::is('book*') ? 'active' : 'inactive' }}">Book</a></li>
+            <li><a href="/genre" class="{{ Request::is('genre*') ? 'active' : 'inactive' }}">Genre</a></li>
+            @guest
+                <li><a href="/login" class="{{ Request::is('login') ? 'active' : 'inactive' }}">Login</a></li>
+                <li><a href="/register" class="{{ Request::is('register') ? 'active' : 'inactive' }}">Register</a></li>
+            @endguest
+            @auth
+                <form action="/logout" method="POST">
+                    @csrf
+                    <div class="d-flex ">
+                        <li class="dropdown cursor-pointer"><i
+                                class="fa-solid fa-user ">&nbsp;&nbsp;{{ Auth::user()->name }}</i>
+                            <ul>
+                                <li><a href="/profile" class="">Profile</a></li>
+                                <li><button class="btn btn-danger">Logout</button></li>
+                            </ul>
+                        </li>
+                    </div>
+                </form>
+            @endauth
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+    </nav>
 
     </div>
-  </header>
+</header>

@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('title')
-    {{-- '{{ $genre->name }}' --}}
     Genre
 @endsection
 @section('content')
